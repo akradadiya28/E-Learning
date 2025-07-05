@@ -24,11 +24,11 @@ function FinalCTA() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                   Start Learning From
                   <br />
-                  World's Pro Instructors
+                  World&apos;s Pro Instructors
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Groove's intuitive shared inbox makes it easy for team members to organize, prioritize and.In this
-                  episode of the Smashing Pod we're going to find out about the art of teaching.
+                  Groove&apos;s intuitive shared inbox makes it easy for team members to organize, prioritize and.In this
+                  episode of the Smashing Pod we&apos;re going to find out about the art of teaching.
                 </p>
               </div>
               <div className="space-y-4">

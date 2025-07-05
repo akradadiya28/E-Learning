@@ -29,7 +29,7 @@ function Features() {
                   Now In One Place
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Groove's intuitive shared inbox makes it easy for team members to organize, prioritize and.In this
+                  Groove&apos;s intuitive shared inbox makes it easy for team members to organize, prioritize and.In this
                   episode.
                 </p>
               </div>

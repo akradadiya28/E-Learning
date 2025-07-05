@@ -56,7 +56,7 @@ function Banner() {
               </h1>
 
               <p className="text-base sm:text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                Every teaching and learning journey is unique. Following We'll help guide your way through upskilling
+                Every teaching and learning journey is unique. Following We&apos;ll help guide your way through upskilling
                 and achieving your goals.
               </p>
             </div>

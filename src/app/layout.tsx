@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import Topbar from "@/components/header/TopBar";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"], // Optional: 'latin' covers most cases
@@ -12,7 +14,8 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "SkillGro - E-Learning Platform",
-  description: "SkillGro is a modern e-learning platform that offers a wide range of courses to help you learn and grow.",
+  description:
+    "SkillGro is a modern e-learning platform that offers a wide range of courses to help you learn and grow.",
 };
 
 export default function RootLayout({
@@ -22,7 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <Topbar />
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

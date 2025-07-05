@@ -73,7 +73,7 @@ function LearningJourney() {
                   </div>
                   <div className="w-full sm:w-32 lg:w-40 h-32 sm:h-32 lg:h-40 relative order-1 sm:order-2 flex-shrink-0">
                     <Image
-                      src="/images/learningjourney/l1j.png"
+                      src="/images/LearningJourney/l1j.png"
                       alt="Become an instructor"
                       fill
                       className="object-cover sm:object-contain group-hover:scale-105 transition-transform duration-300"
@@ -103,7 +103,7 @@ function LearningJourney() {
                   </div>
                   <div className="w-full sm:w-32 lg:w-40 h-32 sm:h-32 lg:h-40 relative order-1 sm:order-2 flex-shrink-0">
                     <Image
-                      src="/images/learningjourney/l2j.png"
+                      src="/images/LearningJourney/l2j.png"
                       alt="Become a student"
                       fill
                       className="object-cover sm:object-contain group-hover:scale-105 transition-transform duration-300"

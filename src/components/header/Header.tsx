@@ -24,12 +24,41 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import type { LucideIcon } from "lucide-react"
+
+type CourseCategory = {
+  icon: LucideIcon
+  name: string
+  courses: number
+  color: string
+}
+
+type FeaturedCourse = {
+  title: string
+  instructor: string
+  rating: number
+  students: string
+  price: string
+  originalPrice: string
+  image: string
+  badge?: string
+}
+
+type AboutLink = {
+  name: string
+  href: string
+}
+
+type BlogCategory = {
+  name: string
+  count: number
+}
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
-  const courseCategories = [
+  const courseCategories: CourseCategory[]  = [
     { icon: Code, name: "Development", courses: 120, color: "bg-blue-100 text-blue-600" },
     { icon: Palette, name: "Design", courses: 85, color: "bg-purple-100 text-purple-600" },
     { icon: BarChart3, name: "Marketing", courses: 95, color: "bg-green-100 text-green-600" },
@@ -38,7 +67,7 @@ export default function Header() {
     { icon: Settings, name: "IT & Software", courses: 75, color: "bg-gray-100 text-gray-600" },
   ]
 
-  const featuredCourses = [
+  const featuredCourses: FeaturedCourse[] = [
     {
       title: "Complete Web Development Bootcamp",
       instructor: "John Smith",
@@ -46,7 +75,7 @@ export default function Header() {
       students: "12.5k",
       price: "$49.99",
       originalPrice: "$199.99",
-      image: "/placeholder.svg?height=80&width=120",
+      image: "/images/courses/c1.jpg",
       badge: "Bestseller",
     },
     {
@@ -56,12 +85,12 @@ export default function Header() {
       students: "8.2k",
       price: "$39.99",
       originalPrice: "$149.99",
-      image: "/placeholder.svg?height=80&width=120",
+      image: "/images/courses/c2.jpg",
       badge: "New",
     },
   ]
 
-  const aboutLinks = [
+  const aboutLinks: AboutLink[] = [
     { name: "About Us", href: "/about" },
     { name: "Our Story", href: "/story" },
     { name: "Team", href: "/team" },
@@ -70,7 +99,7 @@ export default function Header() {
     { name: "Contact", href: "/contact" },
   ]
 
-  const blogCategories = [
+  const blogCategories: BlogCategory[] = [
     { name: "Education Tips", count: 45 },
     { name: "Career Advice", count: 32 },
     { name: "Technology", count: 28 },
