@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Home, ArrowUp, Search, RefreshCw } from "lucide-react"
+import { BookOpen, Home, ArrowUp } from "lucide-react"
 
 export default function NotFound() {
   return (
