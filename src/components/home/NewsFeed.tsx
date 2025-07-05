@@ -1,12 +1,40 @@
-import Link from 'next/link'
-import React from 'react'
-import { Card, CardContent } from '../ui/card'
-import { Badge } from '../ui/badge'
-import Image from 'next/image'
+import Link from "next/link"
+import { Card, CardContent } from "../ui/card"
+import { Badge } from "../ui/badge"
+import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 function NewsFeed() {
+  const newsData = [
+    {
+      title: "How to Become Mediocre and Stuck in 10 Minutes",
+      image: "/images/newsfeed/news1.jpg",
+      date: "March 15, 2024",
+      category: "Education",
+    },
+    {
+      title: "Get Started With 3 Strategies With Top 10 Trends",
+      image: "/images/newsfeed/news2.jpg",
+      date: "March 12, 2024",
+      category: "Strategy",
+    },
+    {
+      title: "Make Your Own Demanding Connecting Content",
+      image: "/images/newsfeed/news3.jpg",
+      date: "March 10, 2024",
+      category: "Content",
+    },
+    {
+      title: "What are the benefits of quality education",
+      image: "/images/newsfeed/news4.jpg",
+      date: "March 8, 2024",
+      category: "Quality",
+    },
+  ]
+
   return (
-    <div>{/* News Feed Section */}
+    <div>
+      {/* News Feed Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -17,33 +45,8 @@ function NewsFeed() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: "How to Become Mediocre and Stuck in 10 Minutes",
-                image: "/images/newsfeed/news1.jpg",
-                date: "March 15, 2024",
-                category: "Education",
-              },
-              {
-                title: "Get Started With 3 Strategies With Top 10 Trends",
-                image: "/images/newsfeed/news2.jpg",
-                date: "March 12, 2024",
-                category: "Strategy",
-              },
-              {
-                title: "Make Your Own Demanding Connecting Content",
-                image: "/images/newsfeed/news3.jpg",
-                date: "March 10, 2024",
-                category: "Content",
-              },
-              {
-                title: "What are the benefits of quality education",
-                image: "/images/newsfeed/news4.jpg",
-                date: "March 8, 2024",
-                category: "Quality",
-              },
-            ].map((post, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
+            {newsData.map((post, index) => (
+              <Card key={`news-${index}`} className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
                 <div className="relative overflow-hidden">
                   <Image
                     src={post.image || "/placeholder.svg"}
@@ -61,15 +64,17 @@ function NewsFeed() {
                   <h3 className="font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
                     {post.title}
                   </h3>
-                  <Link href="#" className="text-blue-600 text-sm font-medium hover:underline">
-                    Read More →
+                  <Link href="#" className="inline-flex items-center text-blue-600 text-sm font-medium hover:underline">
+                    Read More
+                    <ArrowRight className="w-4 h-4 ml-1" />
                   </Link>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
-      </section></div>
+      </section>
+    </div>
   )
 }
 
