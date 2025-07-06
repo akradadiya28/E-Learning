@@ -133,3 +133,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.primary-color {
+  color: #5751e1;
+}
+
+.primary-text-background {
+  background-image: url("/images/icons/Vector.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
