@@ -36,35 +36,33 @@ export default function OfferSection() {
           <div className="inline-block px-4 py-1 rounded-full bg-[#EFEEFE] text-[#6C63FF] text-sm font-semibold mb-4">
             What We Offer
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Learn New Skills When And Where You Like
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
             when known printer took a galley of type scrambl edmake
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch cards">
-          {offers.map((offer, idx) => (
+        <div className="flex flex-wrap gap-6 justify-center items-stretch">
+          {offers.map((offer) => (
             <div
               key={offer.title}
-              className={`relative flex-1 min-w-[260px] max-w-md ${offer.cardBg} rounded-2xl p-6 pt-8 ${offer.shadow} transition`}
+              className={`relative flex-1 basis-[260px] ${offer.cardBg} rounded-2xl p-6 pt-8 ${offer.shadow} transition duration-300 hover:-translate-y-1 hover:shadow-lg`}
             >
-              {/* Decorative stars */}
               <MdAutoAwesome className="absolute top-4 right-6 text-2xl text-gray-300/60" />
-              {/* Icon */}
-              <div
-                className={`w-12 h-12 flex items-center justify-center rounded-full ${offer.iconBg} mb-4 shadow-md`}
-              >
-                {offer.icon}
+              <div className="flex flex-col space-y-3">
+                <div
+                  className={`w-12 h-12 flex items-center justify-center rounded-full ${offer.iconBg} shadow-md`}
+                >
+                  {offer.icon}
+                </div>
+                <h3 className="text-lg font-bold text-[#181942] flex items-center">
+                  {offer.title}
+                </h3>
+                <p className="text-sm text-[#181942] opacity-80 leading-relaxed">
+                  {offer.desc}
+                </p>
               </div>
-              {/* Title */}
-              <h3 className="text-lg font-bold text-[#181942] mb-2 flex items-center">
-                {offer.title}
-              </h3>
-              {/* Description */}
-              <p className="text-sm text-[#181942] opacity-80 leading-relaxed">
-                {offer.desc}
-              </p>
             </div>
           ))}
         </div>
@@ -72,3 +70,4 @@ export default function OfferSection() {
     </section>
   );
 }
+

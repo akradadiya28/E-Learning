@@ -151,7 +151,6 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import Image from "next/image";
-import path from "path";
 import Link from "next/link";
 
 const navItems = [
@@ -207,7 +206,7 @@ export default function Header() {
         <div className="flex flex-1 items-center justify-center gap-8">
           {/* Nav */}
           <nav className="flex gap-6">
-            {navItems.map((item, i) => (
+            {navItems.map((item) => (
               <div
                 key={item.label}
                 className="relative flex items-center group cursor-pointer"

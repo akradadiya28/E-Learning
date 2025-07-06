@@ -2,18 +2,15 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-
-// Swiper components and modules
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -22,7 +19,7 @@ const testimonials = [
     image: "/images/banner/image.png",
     rating: 5,
     testimonial:
-      "when an unknown printer took alley ffrerer area typey and scrambled to make a type specimen book hass",
+      "When an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: 2,
@@ -30,7 +27,7 @@ const testimonials = [
     image: "/images/banner/image.png",
     rating: 5,
     testimonial:
-      "when an unknown printer took alley ffrerer area typey and scrambled to make a type specimen book hass",
+      "When an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: 3,
@@ -38,7 +35,7 @@ const testimonials = [
     image: "/images/banner/image.png",
     rating: 5,
     testimonial:
-      "when an unknown printer took alley ffrerer area typey and scrambled to make a type specimen book hass",
+      "When an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: 4,
@@ -46,7 +43,7 @@ const testimonials = [
     image: "/images/banner/image.png",
     rating: 5,
     testimonial:
-      "when an unknown printer took alley ffrerer area typey and scrambled to make a type specimen book hass",
+      "When an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
   {
     id: 5,
@@ -54,7 +51,7 @@ const testimonials = [
     image: "/images/banner/image.png",
     rating: 5,
     testimonial:
-      "when an unknown printer took alley ffrerer area typey and scrambled to make a type specimen book hass",
+      "When an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
 ];
 
@@ -80,43 +77,43 @@ export default function TestimonialsSection() {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <section className="py-16 px-4 bg-gray-50 min-h-screen flex items-center">
+    <section className="py-16 px-4 sm:px-6 md:px-8 bg-gray-50 flex items-center">
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-1 rounded-full bg-[#EFEEFE] text-[#6C63FF] text-sm font-semibold mb-4">
             Our Testimonials
           </div>
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             What Students Think And Say
             <br />
             About SkillGrow
           </h2>
-          <p className="text-gray-600 text-lg">
-            when known printer took a galley of type scrambl edmake
+          <p className="text-gray-600 text-base sm:text-lg">
+            When a known printer took a galley of type and scrambled it to make.
           </p>
         </div>
 
-        {/* Testimonials Slider */}
+        {/* Slider */}
         <div className="relative">
           {/* Navigation Buttons */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg -ml-6 hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-full items-center justify-center transition-colors duration-200 shadow-lg -ml-6 pointer-events-none md:pointer-events-auto hidden md:flex"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
 
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center transition-colors duration-200 shadow-lg -mr-6 hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-purple-600 hover:bg-purple-700 text-white rounded-full items-center justify-center transition-colors duration-200 shadow-lg -mr-6 pointer-events-none md:pointer-events-auto hidden md:flex"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
+            spaceBetween={16}
             slidesPerView={1}
             centeredSlides={false}
             autoplay={{
@@ -130,13 +127,21 @@ export default function TestimonialsSection() {
                 "swiper-pagination-bullet-active !bg-purple-600",
             }}
             breakpoints={{
-              640: {
+              0: {
+                slidesPerView: 1,
+                spaceBetween: 16,
+              },
+              480: {
                 slidesPerView: 1,
                 spaceBetween: 20,
               },
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 24,
+              },
               768: {
                 slidesPerView: 2,
-                spaceBetween: 30,
+                spaceBetween: 24,
               },
               1024: {
                 slidesPerView: 3,
@@ -146,21 +151,20 @@ export default function TestimonialsSection() {
             onBeforeInit={(swiper) => {
               swiperRef.current = swiper;
             }}
-            className="testimonials-swiper !pb-12"
+            className="testimonials-swiper !pb-12 cursor-grab active:cursor-grabbing"
           >
             {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id}>
                 <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 relative min-h-[200px]">
-                  {/* Quote Icon */}
                   <div className="absolute top-4 right-4 text-purple-200 text-6xl font-serif leading-none">
-                    "
+                    &quot;
                   </div>
 
                   <div className="flex items-start gap-4">
                     {/* Profile Image */}
                     <div className="flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 border-purple-200">
                       <Image
-                        src={testimonial.image || "/placeholder.svg"}
+                        src={testimonial.image}
                         alt={testimonial.name}
                         width={64}
                         height={64}
@@ -175,7 +179,7 @@ export default function TestimonialsSection() {
                         {testimonial.name}
                       </h4>
                       <p className="text-gray-600 leading-relaxed">
-                        " {testimonial.testimonial}"
+                        &quot;{testimonial.testimonial}&quot;
                       </p>
                     </div>
                   </div>
@@ -186,17 +190,16 @@ export default function TestimonialsSection() {
         </div>
       </div>
 
+      {/* Custom Swiper styles */}
       <style jsx global>{`
         .testimonials-swiper .swiper-pagination {
           bottom: 0 !important;
         }
-
         .testimonials-swiper .swiper-pagination-bullet {
-          width: 12px !important;
-          height: 12px !important;
+          width: 10px !important;
+          height: 10px !important;
           opacity: 0.3 !important;
         }
-
         .testimonials-swiper .swiper-pagination-bullet-active {
           opacity: 1 !important;
         }
