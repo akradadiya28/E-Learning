@@ -13,8 +13,11 @@ interface CourseHeaderProps {
   viewMode: "grid" | "list"
   currentParams: Record<string, string | undefined>
   basePath?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   filters: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   categories: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   instructors: any[]
   hideCategory?: boolean
 }
@@ -23,7 +26,6 @@ export function CourseHeader({
   totalResults,
   sortBy,
   viewMode,
-  currentParams,
   basePath = "/courses",
   filters,
   categories,

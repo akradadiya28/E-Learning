@@ -8,7 +8,7 @@ import { categories, coursesData, instructors } from "@/data/coursesData"
 import { Suspense } from "react"
 
 interface CoursesPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string
     language?: string
     price?: string
@@ -19,10 +19,21 @@ interface CoursesPageProps {
     sort?: string
     page?: string
     view?: string
-  }
+  }>
 }
 
-function filterAndSortCourses(searchParams: CoursesPageProps["searchParams"]) {
+function filterAndSortCourses(searchParams: {
+  category?: string
+  language?: string
+  price?: string
+  skillLevel?: string
+  instructor?: string
+  rating?: string
+  search?: string
+  sort?: string
+  page?: string
+  view?: string
+}) {
   let filtered = [...coursesData]
 
   // Apply filters
@@ -91,25 +102,26 @@ function filterAndSortCourses(searchParams: CoursesPageProps["searchParams"]) {
   return filtered
 }
 
-function CoursesContent({ searchParams }: CoursesPageProps) {
-  const filteredCourses = filterAndSortCourses(searchParams)
-  const currentPage = Number.parseInt(searchParams.page || "1")
+async function CoursesContent({ searchParams }: CoursesPageProps) {
+  const params = await searchParams
+  const filteredCourses = filterAndSortCourses(params)
+  const currentPage = Number.parseInt(params.page || "1")
   const coursesPerPage = 9
   const totalPages = Math.ceil(filteredCourses.length / coursesPerPage)
   const startIndex = (currentPage - 1) * coursesPerPage
   const paginatedCourses = filteredCourses.slice(startIndex, startIndex + coursesPerPage)
 
   // Get view mode from URL params, default to grid
-  const viewMode = (searchParams.view as "grid" | "list") || "grid"
+  const viewMode = (params.view as "grid" | "list") || "grid"
 
   const filters = {
-    category: searchParams.category || "all",
-    language: searchParams.language || "all",
-    price: searchParams.price || "all",
-    skillLevel: searchParams.skillLevel || "all",
-    instructor: searchParams.instructor || "all",
-    rating: searchParams.rating || "all",
-    search: searchParams.search || "",
+    category: params.category || "all",
+    language: params.language || "all",
+    price: params.price || "all",
+    skillLevel: params.skillLevel || "all",
+    instructor: params.instructor || "all",
+    rating: params.rating || "all",
+    search: params.search || "",
   }
 
   return (
@@ -124,9 +136,9 @@ function CoursesContent({ searchParams }: CoursesPageProps) {
         <div className="flex-1">
           <CourseHeader
             totalResults={filteredCourses.length}
-            sortBy={searchParams.sort || "popular"}
+            sortBy={params.sort || "popular"}
             viewMode={viewMode}
-            currentParams={searchParams}
+            currentParams={params}
             filters={filters}
             categories={categories}
             instructors={instructors}
@@ -135,7 +147,7 @@ function CoursesContent({ searchParams }: CoursesPageProps) {
           <CourseGrid courses={paginatedCourses} viewMode={viewMode} />
 
           {totalPages > 1 && (
-            <CoursePagination currentPage={currentPage} totalPages={totalPages} currentParams={searchParams} />
+            <CoursePagination currentPage={currentPage} totalPages={totalPages} currentParams={params} />
           )}
         </div>
       </div>
@@ -143,7 +155,7 @@ function CoursesContent({ searchParams }: CoursesPageProps) {
   )
 }
 
-export default function CoursesPage({ searchParams }: CoursesPageProps) {
+export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: "All Courses", current: true },

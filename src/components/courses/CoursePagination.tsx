@@ -14,7 +14,6 @@ interface CoursePaginationProps {
 export function CoursePagination({
   currentPage,
   totalPages,
-  currentParams,
   basePath = "/courses",
 }: CoursePaginationProps) {
   const router = useRouter()

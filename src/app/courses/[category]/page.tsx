@@ -9,10 +9,10 @@ import { PageLayout } from "@/components/common/PageLayout"
 import { CoursesSkeleton } from "@/components/courses/CoursesSkeleton"
 
 interface CategoryCoursesPageProps {
-  params: {
+  params: Promise<{
     category: string
-  }
-  searchParams: {
+  }>
+  searchParams: Promise<{
     language?: string
     price?: string
     skillLevel?: string
@@ -22,10 +22,20 @@ interface CategoryCoursesPageProps {
     sort?: string
     page?: string
     view?: string
-  }
+  }>
 }
 
-function filterAndSortCourses(category: string, searchParams: CategoryCoursesPageProps["searchParams"]) {
+function filterAndSortCourses(category: string, searchParams: {
+  language?: string
+  price?: string
+  skillLevel?: string
+  instructor?: string
+  rating?: string
+  search?: string
+  sort?: string
+  page?: string
+  view?: string
+}) {
   // First filter by category
   let filtered = coursesData.filter(
     (course) => course.category.toLowerCase().replace(/\s+/g, "-") === category.toLowerCase(),
@@ -92,32 +102,35 @@ function filterAndSortCourses(category: string, searchParams: CategoryCoursesPag
   return filtered
 }
 
-function CategoryCoursesContent({ params, searchParams }: CategoryCoursesPageProps) {
-  const category = params.category
+async function CategoryCoursesContent({ params, searchParams }: CategoryCoursesPageProps) {
+  const resolvedParams = await params
+  const resolvedSearchParams = await searchParams
+  
+  const category = resolvedParams.category
   const categoryData = categories.find((cat) => cat.slug === category)
 
   if (!categoryData) {
     notFound()
   }
 
-  const filteredCourses = filterAndSortCourses(category, searchParams)
-  const currentPage = Number.parseInt(searchParams.page || "1")
+  const filteredCourses = filterAndSortCourses(category, resolvedSearchParams)
+  const currentPage = Number.parseInt(resolvedSearchParams.page || "1")
   const coursesPerPage = 9
   const totalPages = Math.ceil(filteredCourses.length / coursesPerPage)
   const startIndex = (currentPage - 1) * coursesPerPage
   const paginatedCourses = filteredCourses.slice(startIndex, startIndex + coursesPerPage)
 
   // Get view mode from URL params, default to grid
-  const viewMode = (searchParams.view as "grid" | "list") || "grid"
+  const viewMode = (resolvedSearchParams.view as "grid" | "list") || "grid"
 
   const filters = {
     category: category,
-    language: searchParams.language || "all",
-    price: searchParams.price || "all",
-    skillLevel: searchParams.skillLevel || "all",
-    instructor: searchParams.instructor || "all",
-    rating: searchParams.rating || "all",
-    search: searchParams.search || "",
+    language: resolvedSearchParams.language || "all",
+    price: resolvedSearchParams.price || "all",
+    skillLevel: resolvedSearchParams.skillLevel || "all",
+    instructor: resolvedSearchParams.instructor || "all",
+    rating: resolvedSearchParams.rating || "all",
+    search: resolvedSearchParams.search || "",
   }
 
   return (
@@ -138,9 +151,9 @@ function CategoryCoursesContent({ params, searchParams }: CategoryCoursesPagePro
         <div className="flex-1">
           <CourseHeader
             totalResults={filteredCourses.length}
-            sortBy={searchParams.sort || "popular"}
+            sortBy={resolvedSearchParams.sort || "popular"}
             viewMode={viewMode}
-            currentParams={searchParams}
+            currentParams={resolvedSearchParams}
             basePath={`/courses/${category}`}
             filters={filters}
             categories={categories}
@@ -154,7 +167,7 @@ function CategoryCoursesContent({ params, searchParams }: CategoryCoursesPagePro
             <CoursePagination
               currentPage={currentPage}
               totalPages={totalPages}
-              currentParams={searchParams}
+              currentParams={resolvedSearchParams}
               basePath={`/courses/${category}`}
             />
           )}
@@ -164,8 +177,9 @@ function CategoryCoursesContent({ params, searchParams }: CategoryCoursesPagePro
   )
 }
 
-export default function CategoryCoursesPage({ params, searchParams }: CategoryCoursesPageProps) {
-  const category = params.category
+export default async function CategoryCoursesPage({ params, searchParams }: CategoryCoursesPageProps) {
+  const resolvedParams = await params
+  const category = resolvedParams.category
   const categoryData = categories.find((cat) => cat.slug === category)
 
   if (!categoryData) {

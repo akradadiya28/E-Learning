@@ -31,7 +31,7 @@ export default function Terms() {
 
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">3. Disclaimer</h2>
             <p className="text-gray-600 mb-6">
-              The materials on SkillGro are provided on an 'as is' basis. SkillGro makes no warranties, expressed or
+              The materials on SkillGro are provided on an &apos;as is&apos; basis. SkillGro makes no warranties, expressed or
               implied.
             </p>
 
