@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import Topbar from "@/components/header/TopBar";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { ScrollToTop } from "@/components/common/ScrollToTop";
 
 const poppins = Poppins({
   subsets: ["latin"], // Optional: 'latin' covers most cases
@@ -29,6 +30,7 @@ export default function RootLayout({
         <Topbar />
         <Header />
         {children}
+        <ScrollToTop variant="purple" showAfter={300} />
         <Footer />
       </body>
     </html>
