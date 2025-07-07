@@ -1,10 +1,10 @@
-import { PageBreadcrumb } from "@/components/common/PageBreadcrumb";
 import Partners from "@/components/home/Partners";
 import Newsletter from "@/components/home/Newsletter";
 import TestimonialsSection from "@/components/about/Testimonial";
 import AboutBanner from "@/components/about/AboutBanner";
 import OfferSection from "@/components/about/OfferSection";
 import JourneySection from "@/components/about/JourneySection";
+import { PageLayout } from "@/components/common/PageLayout";
 
 export default function AboutPage() {
   const breadcrumbs = [
@@ -12,8 +12,12 @@ export default function AboutPage() {
     { label: "About Us", current: true },
   ];
   return (
-    <>
-      <PageBreadcrumb items={breadcrumbs} showLogo={true} />
+    <PageLayout
+      breadcrumbs={breadcrumbs}
+      backgroundVariant="default"
+      backgroundIntensity="light"
+      showAnimations={false}
+    >
       {/* About Banner */}
       <AboutBanner />
       {/* Parteners */}
@@ -26,6 +30,6 @@ export default function AboutPage() {
       <JourneySection />
       {/* Testimonials */}
       <TestimonialsSection />
-    </>
+    </PageLayout>
   );
 }
