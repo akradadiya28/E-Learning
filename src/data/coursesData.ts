@@ -4,6 +4,7 @@ export const coursesData: Course[] = [
   {
     id: "1",
     title: "Learning JavaScript With Imagination",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "David Millar",
     category: "Development",
     skillLevel: "Beginner",
@@ -28,6 +29,7 @@ export const coursesData: Course[] = [
   {
     id: "2",
     title: "The Complete Graphic Design for Beginners",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jenny Wilson",
     category: "Design",
     skillLevel: "Beginner",
@@ -52,6 +54,7 @@ export const coursesData: Course[] = [
   {
     id: "3",
     title: "Learning Digital Marketing on Facebook",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Wade Warren",
     category: "Marketing",
     skillLevel: "Intermediate",
@@ -76,6 +79,7 @@ export const coursesData: Course[] = [
   {
     id: "4",
     title: "Financial Analyst Training & Investing Course",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Robert Fox",
     category: "Business",
     skillLevel: "Advanced",
@@ -100,6 +104,7 @@ export const coursesData: Course[] = [
   {
     id: "5",
     title: "Data Analysis & Visualisation Masterclass",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Guy Hawkins",
     category: "Data Science",
     skillLevel: "Intermediate",
@@ -124,6 +129,7 @@ export const coursesData: Course[] = [
   {
     id: "6",
     title: "Master the Fundamentals of Math",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Savannah Marx",
     category: "Mathematics",
     skillLevel: "Beginner",
@@ -147,6 +153,7 @@ export const coursesData: Course[] = [
   {
     id: "7",
     title: "Introduction to Web Accessibility",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jacob Jones",
     category: "Development",
     skillLevel: "Beginner",
@@ -171,6 +178,7 @@ export const coursesData: Course[] = [
   {
     id: "8",
     title: "Yoga for Mindfulness and Relaxation",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jenny Wilson",
     category: "Health & Fitness",
     skillLevel: "Beginner",
@@ -195,6 +203,7 @@ export const coursesData: Course[] = [
   {
     id: "9",
     title: "Photography Essentials for Beginners",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Guy Hawkins",
     category: "Art & Design",
     skillLevel: "Beginner",
@@ -218,6 +227,7 @@ export const coursesData: Course[] = [
   {
     id: "10",
     title: "Advanced Excel for Business Analysis",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Robert Fox",
     category: "Finance",
     skillLevel: "Advanced",
@@ -241,6 +251,7 @@ export const coursesData: Course[] = [
   {
     id: "11",
     title: "Introduction to Public Speaking",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Savannah Marx",
     category: "Lifestyle",
     skillLevel: "Beginner",
@@ -264,6 +275,7 @@ export const coursesData: Course[] = [
   {
     id: "12",
     title: "Creative Writing Masterclass",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "David Millar",
     category: "Lifestyle",
     skillLevel: "Intermediate",
@@ -288,6 +300,7 @@ export const coursesData: Course[] = [
   {
     id: "13",
     title: "Project Management Fundamentals",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jacob Jones",
     category: "Business",
     skillLevel: "Beginner",
@@ -311,6 +324,7 @@ export const coursesData: Course[] = [
   {
     id: "14",
     title: "Nutrition and Healthy Living",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jenny Wilson",
     category: "Health & Fitness",
     skillLevel: "Beginner",
@@ -334,6 +348,7 @@ export const coursesData: Course[] = [
   {
     id: "15",
     title: "Machine Learning A-Z",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Guy Hawkins",
     category: "Data Science",
     skillLevel: "Advanced",
@@ -357,6 +372,7 @@ export const coursesData: Course[] = [
   {
     id: "16",
     title: "Photoshop CC Essentials",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Robert Fox",
     category: "Art & Design",
     skillLevel: "Beginner",
@@ -380,6 +396,7 @@ export const coursesData: Course[] = [
   {
     id: "17",
     title: "Advanced Java Programming",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "David Millar",
     category: "Development",
     skillLevel: "Advanced",
@@ -403,6 +420,7 @@ export const coursesData: Course[] = [
   {
     id: "18",
     title: "Investing in Stock Market for Beginners",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jacob Jones",
     category: "Finance",
     skillLevel: "Beginner",
@@ -426,6 +444,7 @@ export const coursesData: Course[] = [
   {
     id: "19",
     title: "Basic Statistics with R",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Savannah Marx",
     category: "Mathematics",
     skillLevel: "Intermediate",
@@ -449,6 +468,7 @@ export const coursesData: Course[] = [
   {
     id: "20",
     title: "Mindfulness Meditation for Everyday Life",
+    slug: "resolving-conflicts-designers-engineers",
     instructor: "Jenny Wilson",
     category: "Health & Fitness",
     skillLevel: "Beginner",

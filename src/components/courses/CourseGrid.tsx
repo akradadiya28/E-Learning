@@ -73,7 +73,7 @@ export function CourseGrid({ courses, viewMode = "grid" }: CourseGridProps) {
 
                     {/* Course Title */}
                     <h3 className="font-bold text-lg md:text-xl text-gray-900 mb-2 md:mb-3 hover:text-blue-600 transition-colors line-clamp-2">
-                      <Link href={`/course/${course.id}`}>{course.title}</Link>
+                      <Link href={`/course/${course.slug}`}>{course.title}</Link>
                     </h3>
 
                     {/* Course Description */}
@@ -198,7 +198,7 @@ export function CourseGrid({ courses, viewMode = "grid" }: CourseGridProps) {
 
             {/* Course Title */}
             <h3 className="font-bold text-base md:text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
-              <Link href={`/course/${course.id}`}>{course.title}</Link>
+              <Link href={`/course/${course.slug}`}>{course.title}</Link>
             </h3>
 
             {/* Instructor */}
