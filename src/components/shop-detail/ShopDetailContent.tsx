@@ -4,7 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
 import { Star, Heart, ShoppingCart, Plus, Minus } from "lucide-react"
 import type { Product } from "@/types/product"
 import { ShopDetailTabs } from "./ShopDetailTabs"
@@ -216,7 +215,7 @@ export function ShopDetailContent({ product, relatedProducts }: ShopDetailConten
       </div>
 
       {/* Product Tabs */}
-      <ShopDetailTabs product={product} />
+      <ShopDetailTabs />
 
       {/* Related Products */}
       <RelatedProducts products={relatedProducts} />

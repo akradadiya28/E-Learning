@@ -149,9 +149,6 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   return (
     <PageLayout
       breadcrumbs={breadcrumbs}
-      backgroundVariant="default"
-      backgroundIntensity="light"
-      showAnimations={false}
     >
       <Suspense fallback={<ProductsSkeleton />}>
         <ShopContent searchParams={searchParams} />

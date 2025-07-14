@@ -1,13 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import type { Product } from "@/types/product"
 
-interface ShopDetailTabsProps {
-  product: Product
-}
-
-export function ShopDetailTabs({ product }: ShopDetailTabsProps) {
+export function ShopDetailTabs() {
   const [activeTab, setActiveTab] = useState("description")
 
   const tabs = [

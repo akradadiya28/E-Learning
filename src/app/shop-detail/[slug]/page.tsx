@@ -39,9 +39,6 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   return (
     <PageLayout
       breadcrumbs={breadcrumbs}
-      backgroundVariant="default"
-      backgroundIntensity="light"
-      showAnimations={false}
     >
       <Suspense fallback={<ShopDetailSkeleton />}>
         <ShopDetailPageContent params={params} />
