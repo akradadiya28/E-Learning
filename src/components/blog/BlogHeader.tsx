@@ -5,68 +5,62 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button"
 import { Grid3X3, List, SlidersHorizontal } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ProductFilters } from "@/components/shop/ProductFilters"
+import { BlogFiltersComponent } from "@/components/blog/BlogFilters"
+import type { BlogFilters } from "@/types/blog"
 
-interface ProductHeaderProps {
+interface BlogHeaderProps {
+  filters: BlogFilters
+  onFiltersChange: (filters: BlogFilters) => void
   totalResults: number
-  sortBy: string
   viewMode: "grid" | "list"
-  currentParams: Record<string, string | undefined>
-  basePath?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  filters: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  categories: any[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  languages: any[]
+  onViewModeChange: (mode: "grid" | "list") => void
 }
 
-export function ProductHeader({
-  totalResults,
-  sortBy,
-  viewMode,
-  basePath = "/shop",
-  filters,
-  categories,
-  languages,
-}: ProductHeaderProps) {
+export function BlogHeader({ filters, onFiltersChange, totalResults, viewMode, onViewModeChange }: BlogHeaderProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const updateSort = (newSort: string) => {
     const params = new URLSearchParams(searchParams.toString())
-
-    if (newSort !== "popular") {
+    if (newSort !== "newest") {
       params.set("sort", newSort)
     } else {
       params.delete("sort")
     }
-
     // Remove page parameter when sort changes
     params.delete("page")
-
-    const newUrl = params.toString() ? `${basePath}?${params.toString()}` : basePath
+    const newUrl = params.toString() ? `/blog?${params.toString()}` : "/blog"
     router.push(newUrl)
+
+    // Update local state
+    onFiltersChange({ ...filters, sortBy: newSort, page: 1 })
   }
 
   const updateViewMode = (newViewMode: "grid" | "list") => {
     const params = new URLSearchParams(searchParams.toString())
-
     if (newViewMode !== "grid") {
       params.set("view", newViewMode)
     } else {
       params.delete("view")
     }
-
-    const newUrl = params.toString() ? `${basePath}?${params.toString()}` : basePath
+    const newUrl = params.toString() ? `/blog?${params.toString()}` : "/blog"
     router.push(newUrl)
+
+    // Update local state
+    onViewModeChange(newViewMode)
   }
+
+  // Count active filters
+  const activeFiltersCount = [filters.search, filters.category !== "all" ? filters.category : null, filters.tag].filter(
+    Boolean,
+  ).length
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 p-4 bg-white rounded-lg shadow-sm border">
       <div className="flex items-center justify-between sm:justify-start gap-4">
         <p className="text-gray-600 text-sm sm:text-base">
-          Showing <span className="font-semibold text-gray-900">1-9</span> of <span className="font-semibold text-gray-900">{totalResults}</span> Results
+          Showing <span className="font-semibold text-gray-900">1-9</span> of{" "}
+          <span className="font-semibold text-gray-900">{totalResults}</span> Results
         </p>
 
         {/* Mobile/Tablet Filters Button */}
@@ -81,14 +75,9 @@ export function ProductHeader({
             <div className="p-6">
               <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <SlidersHorizontal className="w-5 h-5" />
-                Filter Products
+                Filter Blogs
               </h2>
-              <ProductFilters
-                filters={filters}
-                categories={categories}
-                languages={languages}
-                basePath={basePath}
-              />
+              <BlogFiltersComponent filters={filters} onFiltersChange={onFiltersChange} totalResults={totalResults} />
             </div>
           </SheetContent>
         </Sheet>
@@ -98,16 +87,16 @@ export function ProductHeader({
         {/* Sort Dropdown */}
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 hidden sm:inline">Sort By:</span>
-          <Select value={sortBy} onValueChange={updateSort}>
+          <Select value={filters.sortBy} onValueChange={updateSort}>
             <SelectTrigger className="w-40">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="popular">Most Popular</SelectItem>
               <SelectItem value="newest">Newest</SelectItem>
-              <SelectItem value="price-low">Price: Low to High</SelectItem>
-              <SelectItem value="price-high">Price: High to Low</SelectItem>
-              <SelectItem value="rating">Highest Rated</SelectItem>
+              <SelectItem value="oldest">Oldest</SelectItem>
+              <SelectItem value="popular">Most Popular</SelectItem>
+              <SelectItem value="title">Title A-Z</SelectItem>
+              <SelectItem value="read-time">Read Time</SelectItem>
             </SelectContent>
           </Select>
         </div>

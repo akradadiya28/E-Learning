@@ -67,8 +67,9 @@ export function CourseHeader({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 p-4 bg-white rounded-lg shadow-sm border">
       <div className="flex items-center justify-between sm:justify-start gap-4">
-        <p className="text-gray-600 text-sm sm:text-base">
-          Showing <span className="font-semibold text-gray-900">{totalResults}</span> Total Results
+         <p className="text-gray-600 text-sm sm:text-base">
+          Showing <span className="font-semibold text-gray-900">1-9</span> of{" "}
+          <span className="font-semibold text-gray-900">{totalResults}</span> Results
         </p>
 
         {/* Mobile/Tablet Filters Button */}
