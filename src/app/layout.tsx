@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import Topbar from "@/components/header/TopBar"; 
-import DynamicHeader from "@/components/header/DynamicHeader";
+import Topbar from "@/components/header/TopBar";
+import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { ScrollToTop } from "@/components/common/ScrollToTop";
 
@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <Topbar />
-        <DynamicHeader />
+        <Header />
         {children}
         <ScrollToTop variant="purple" showAfter={300} />
         <Footer />
