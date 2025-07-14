@@ -21,7 +21,8 @@ export const productsData: Product[] = [
     author: "Adeline Garden",
     format: "PDF",
     pages: 120,
-    fileSize: "15.2 MB"
+    fileSize: "15.2 MB",
+    description: "A beautiful guide to garden design and lifestyle. Learn how to create stunning outdoor spaces that reflect your personal style and enhance your living environment."
   },
   {
     id: "2",
@@ -43,7 +44,8 @@ export const productsData: Product[] = [
     author: "Explorer Team",
     format: "Video",
     duration: "2h 30m",
-    fileSize: "1.2 GB"
+    fileSize: "1.2 GB",
+    description: "Discover new opportunities and explore your potential with this comprehensive guide to personal and professional development."
   },
   {
     id: "3",
@@ -65,7 +67,8 @@ export const productsData: Product[] = [
     author: "Wildlife Team",
     format: "PDF",
     pages: 200,
-    fileSize: "45.8 MB"
+    fileSize: "45.8 MB",
+    description: "An exciting journey through wildlife photography and conservation. Learn professional techniques for capturing stunning wildlife images."
   },
   {
     id: "4",
@@ -87,7 +90,8 @@ export const productsData: Product[] = [
     author: "Ketut Susilo",
     format: "PDF",
     pages: 80,
-    fileSize: "25.4 MB"
+    fileSize: "25.4 MB",
+    description: "Beautiful sky photography and artistic techniques. Master the art of capturing breathtaking sky compositions and atmospheric conditions."
   },
   {
     id: "5",
@@ -109,7 +113,8 @@ export const productsData: Product[] = [
     author: "Design Master",
     format: "Video",
     duration: "3h 15m",
-    fileSize: "2.1 GB"
+    fileSize: "2.1 GB",
+    description: "Master the art of illusion in graphic design. Learn advanced techniques to create mind-bending visual effects and optical illusions."
   },
   {
     id: "6",
