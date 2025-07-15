@@ -16,6 +16,7 @@ export interface BlogPost {
   updatedAt: string
   tags: string[]
   featured: boolean
+  fullContent?: string
 }
 
 export interface BlogFilters {

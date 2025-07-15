@@ -83,7 +83,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
                 </div>
               </div>
 
-              <Link href={`/blog/${post.slug}`}>
+              <Link href={`/blog-detail/${post.slug}`}>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                   {post.title}
                 </h3>
@@ -148,7 +148,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
             </div>
           </div>
 
-          <Link href={`/blog/${post.slug}`}>
+          <Link href={`/blog-detail/${post.slug}`}>
             <h3 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
               {post.title}
             </h3>
