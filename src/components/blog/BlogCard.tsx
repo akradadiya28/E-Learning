@@ -25,6 +25,12 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
       Agency: "bg-purple-500",
       Business: "bg-red-500",
       Development: "bg-yellow-500",
+      "Web Development": "bg-blue-600",
+      React: "bg-cyan-500",
+      CSS: "bg-pink-500",
+      TypeScript: "bg-blue-700",
+      "Next.js": "bg-gray-800",
+      Accessibility: "bg-green-600",
     }
     return colors[category as keyof typeof colors] || "bg-gray-500"
   }
@@ -38,6 +44,10 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
     })
   }
 
+  // Generate random views and likes for demo
+  const views = Math.floor(Math.random() * 1000) + 100
+  const likes = Math.floor(Math.random() * 50) + 10
+
   if (viewMode === "list") {
     return (
       <Card className="group hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
@@ -46,7 +56,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
             {/* Image */}
             <div className="relative w-full sm:w-80 h-64 sm:h-48 overflow-hidden">
               <Image
-                src={post.featuredImage || "/placeholder.svg"}
+                src={post.image || "/placeholder.svg"}
                 alt={post.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -69,7 +79,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
                 </div>
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
-                  <span>{post.readTime} min read</span>
+                  <span>{post.readTime}</span>
                 </div>
               </div>
 
@@ -85,7 +95,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <div className="flex items-center gap-1">
                     <Eye className="w-4 h-4" />
-                    <span>{post.views}</span>
+                    <span>{views}</span>
                   </div>
                   <button
                     onClick={() => setIsLiked(!isLiked)}
@@ -94,7 +104,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
                     }`}
                   >
                     <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
-                    <span>{post.likes + (isLiked ? 1 : 0)}</span>
+                    <span>{likes + (isLiked ? 1 : 0)}</span>
                   </button>
                 </div>
 
@@ -115,7 +125,7 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
         {/* Image */}
         <div className="relative h-64 overflow-hidden">
           <Image
-            src={post.featuredImage || "/placeholder.svg"}
+            src={post.image || "/placeholder.svg"}
             alt={post.title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -150,11 +160,11 @@ export function BlogCard({ post, viewMode = "grid" }: BlogCardProps) {
             <div className="flex items-center gap-3 text-sm text-gray-500">
               <div className="flex items-center gap-1">
                 <Clock className="w-4 h-4" />
-                <span>{post.readTime} min</span>
+                <span>{post.readTime}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Eye className="w-4 h-4" />
-                <span>{post.views}</span>
+                <span>{views}</span>
               </div>
             </div>
 

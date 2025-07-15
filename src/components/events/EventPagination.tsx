@@ -4,18 +4,18 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-interface BlogPaginationProps {
+interface EventPaginationProps {
   currentPage: number
   totalPages: number
   currentParams: Record<string, string | undefined>
   basePath?: string
 }
 
-export function BlogPagination({
+export function EventPagination({
   currentPage,
   totalPages,
-  basePath = "/blog",
-}: BlogPaginationProps) {
+  basePath = "/events",
+}: EventPaginationProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 

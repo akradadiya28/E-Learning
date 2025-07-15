@@ -1,15 +1,9 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  Search,
-  Bell,
-  ShoppingCart,
   MapPin,
-  Phone,
-  Mail,
   Facebook,
   Twitter,
   Instagram,
@@ -99,7 +93,7 @@ export default function SkillGroCoursePage() {
             {/* What you'll learn */}
             <div className="mb-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">
-                What you'll learn in this event?
+                What you&apos;ll learn in this event?
               </h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

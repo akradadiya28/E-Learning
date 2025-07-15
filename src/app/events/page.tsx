@@ -1,137 +1,134 @@
-import { PageLayout } from "@/components/common/PageLayout";
-import React from "react";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { Suspense } from "react"
+import { PageLayout } from "@/components/common/PageLayout"
+import { eventCategories, eventsData } from "@/data/eventsData"
+import { EventsSkeleton } from "@/components/events/EventsSkeleton"
+import { EventFilters } from "@/components/events/EventFilters"
+import { EventHeader } from "@/components/events/EventHeader"
+import { EventGrid } from "@/components/events/EventGrid"
+import { EventPagination } from "@/components/events/EventPagination"
 
-export default function EventPage() {
-  // Breadcrumbs data
+interface EventsPageProps {
+  searchParams: Promise<{
+    category?: string
+    location?: string
+    date?: string
+    search?: string
+    sort?: string
+    page?: string
+    view?: string
+  }>
+}
+
+function filterAndSortEvents(searchParams: {
+  category?: string
+  location?: string
+  date?: string
+  search?: string
+  sort?: string
+  page?: string
+  view?: string
+}) {
+  let filtered = [...eventsData]
+
+  // Apply filters
+  if (searchParams.category && searchParams.category !== "all") {
+    filtered = filtered.filter((event) => event.category.toLowerCase().replace(/\s+/g, "-") === searchParams.category?.toLowerCase())
+  }
+
+  if (searchParams.location && searchParams.location !== "all") {
+    filtered = filtered.filter((event) => event.location.toLowerCase().includes(searchParams.location?.toLowerCase() || ""))
+  }
+
+  if (searchParams.search) {
+    filtered = filtered.filter(
+      (event) =>
+        event.title.toLowerCase().includes(searchParams.search?.toLowerCase() || "") ||
+        event.description.toLowerCase().includes(searchParams.search?.toLowerCase() || "") ||
+        event.location.toLowerCase().includes(searchParams.search?.toLowerCase() || "") ||
+        event.tags.some(tag => tag.toLowerCase().includes(searchParams.search?.toLowerCase() || ""))
+    )
+  }
+
+  // Apply sorting
+  const sortBy = searchParams.sort || "newest"
+  switch (sortBy) {
+    case "newest":
+      filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      break
+    case "oldest":
+      filtered.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      break
+    case "title":
+      filtered.sort((a, b) => a.title.localeCompare(b.title))
+      break
+    default:
+      break
+  }
+
+  return filtered
+}
+
+async function EventsContent({ searchParams }: EventsPageProps) {
+  const params = await searchParams
+  const filteredEvents = filterAndSortEvents(params)
+  const currentPage = Number.parseInt(params.page || "1")
+  const eventsPerPage = 8
+  const totalPages = Math.ceil(filteredEvents.length / eventsPerPage)
+  const startIndex = (currentPage - 1) * eventsPerPage
+  const paginatedEvents = filteredEvents.slice(startIndex, startIndex + eventsPerPage)
+
+  const filters = {
+    category: params.category || "all",
+    location: params.location || "all",
+    date: params.date || "all",
+    search: params.search || "",
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Sidebar Filters - Hidden on mobile/tablet */}
+        <div className="hidden lg:block lg:w-80 flex-shrink-0">
+          <EventFilters filters={filters} categories={eventCategories} />
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1">
+          <EventHeader
+            totalResults={filteredEvents.length}
+            sortBy={params.sort || "newest"}
+            currentParams={params}
+            filters={filters}
+            categories={eventCategories}
+          />
+
+          <EventGrid events={paginatedEvents} />
+
+          {totalPages > 1 && (
+            <EventPagination currentPage={currentPage} totalPages={totalPages} currentParams={params} />
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default async function EventsPage({ searchParams }: EventsPageProps) {
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Events", href: "/instructors" },
-  ];
+    { label: "All Events", current: true },
+  ]
 
-  const products = [
-    {
-      image:
-        "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "25 June, 2024",
-      title: "Exactly How Technology Can Make Reading",
-      location: "Colorado",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256401/pexels-photo-256401.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "12 May, 2024",
-      title: "The Future of Online Learning Platforms",
-      location: "California",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/414519/pexels-photo-414519.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "03 April, 2024",
-      title: "How AI is Changing Education",
-      location: "Texas",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "18 March, 2024",
-      title: "Reading Habits in the Digital Age",
-      location: "New York",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256455/pexels-photo-256455.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "09 March, 2024",
-      title: "The Power of Group Study Sessions",
-      location: "Florida",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256431/pexels-photo-256431.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "28 Feb, 2024",
-      title: "Why Libraries Still Matter",
-      location: "Illinois",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "15 Feb, 2024",
-      title: "Blending Tech and Traditional Learning",
-      location: "Washington",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256460/pexels-photo-256460.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "01 Feb, 2024",
-      title: "How to Stay Motivated to Read",
-      location: "Oregon",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256464/pexels-photo-256464.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "20 Jan, 2024",
-      title: "The Benefits of Early Education",
-      location: "Georgia",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256468/pexels-photo-256468.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "10 Jan, 2024",
-      title: "How to Build a Reading Habit",
-      location: "Nevada",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256470/pexels-photo-256470.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "02 Jan, 2024",
-      title: "The Science of Learning",
-      location: "Arizona",
-    },
-    {
-      image:
-        "https://images.pexels.com/photos/256472/pexels-photo-256472.jpeg?auto=compress&w=400&h=300&fit=crop",
-      date: "25 Dec, 2023",
-      title: "Why Reading is Still Important",
-      location: "Ohio",
-    },
-  ];
   return (
-    <>
-      <PageLayout breadcrumbs={breadcrumbs}>
-        <section className="py-12 px-2 md:px-0 ">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-              {products.map((product, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-gray-200 p-3 shadow-sm bg-white transition hover:shadow-lg"
-                >
-                  {/* Image + Date */}
-                  <div className="relative rounded-xl overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-48 object-cover rounded-xl"
-                    />
-                    <span className="absolute left-3 bottom-3 bg-yellow-400 text-gray-900 font-semibold text-sm px-4 py-1 rounded-full shadow border border-yellow-300">
-                      {product.date}
-                    </span>
-                  </div>
-                  {/* Title */}
-                  <h3 className="mt-5 mb-2 text-lg font-bold text-gray-900 leading-snug">
-                    {product.title}
-                  </h3>
-                  {/* Location */}
-                  <div className="flex items-center gap-2 text-gray-500 text-sm mb-1">
-                    <FaMapMarkerAlt className="text-purple-600 text-base" />
-                    <span>{product.location}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </PageLayout>
-    </>
-  );
+    <PageLayout
+      breadcrumbs={breadcrumbs}
+      backgroundVariant="default"
+      backgroundIntensity="light"
+      showAnimations={false}
+    >
+      <Suspense fallback={<EventsSkeleton />}>
+        <EventsContent searchParams={searchParams} />
+      </Suspense>
+    </PageLayout>
+  )
 }

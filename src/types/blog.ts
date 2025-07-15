@@ -4,19 +4,25 @@ export interface BlogPost {
   slug: string
   excerpt: string
   content: string
-  featuredImage: string
-  category: string
-  tags: string[]
+  image: string
   author: {
     name: string
     avatar: string
     bio: string
   }
+  category: string
+  readTime: string
   publishedAt: string
-  readTime: number
-  views: number
-  likes: number
+  updatedAt: string
+  tags: string[]
   featured: boolean
+}
+
+export interface BlogFilters {
+  search: string
+  category: string
+  author: string
+  tag: string
 }
 
 export interface BlogCategory {
@@ -24,28 +30,4 @@ export interface BlogCategory {
   name: string
   slug: string
   count: number
-  color: string
-}
-
-export interface BlogTag {
-  id: string
-  name: string
-  slug: string
-  count: number
-}
-
-export interface BlogFilters {
-  search: string
-  category: string
-  tag: string
-  sortBy: string
-  page: number
-}
-
-export interface BlogSearchParams {
-  search?: string
-  category?: string
-  tag?: string
-  sort?: string
-  page?: string
 }

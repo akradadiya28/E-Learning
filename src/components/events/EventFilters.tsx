@@ -8,26 +8,26 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ChevronDown, ChevronUp, Search, X } from "lucide-react"
-import type { BlogFilters as FilterType, BlogCategory } from "@/types/blog"
+import type { EventFilters as FilterType, EventCategory } from "@/types/events"
 
-interface BlogFiltersProps {
+interface EventFiltersProps {
   filters: FilterType
-  categories: BlogCategory[]
+  categories: EventCategory[]
   basePath?: string
 }
 
-export function BlogFilters({
+export function EventFilters({
   filters,
   categories,
-  basePath = "/blog",
-}: BlogFiltersProps) {
+  basePath = "/events",
+}: EventFiltersProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const [expandedSections, setExpandedSections] = useState({
     categories: true,
-    authors: false,
-    tags: false,
+    locations: false,
+    dates: false,
   })
 
   const toggleSection = (section: keyof typeof expandedSections) => {
@@ -59,8 +59,8 @@ export function BlogFilters({
   const clearAllFilters = () => {
     const clearedFilters: Partial<FilterType> = {
       category: "all",
-      author: "all",
-      tag: "all",
+      location: "all",
+      date: "all",
       search: "",
     }
 
@@ -76,13 +76,13 @@ export function BlogFilters({
       {/* Search */}
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg">Search Blog</CardTitle>
+          <CardTitle className="text-lg">Search Events</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
-              placeholder="Search blog posts..."
+              placeholder="Search events..."
               value={filters.search}
               onChange={(e) => updateURL({ search: e.target.value })}
               className="pl-10 pr-10"
@@ -135,73 +135,36 @@ export function BlogFilters({
         )}
       </Card>
 
-      {/* Authors */}
+      {/* Locations */}
       <Card>
-        <CardHeader className="pb-3 cursor-pointer" onClick={() => toggleSection("authors")}>
+        <CardHeader className="pb-3 cursor-pointer" onClick={() => toggleSection("locations")}>
           <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Authors</CardTitle>
-            {expandedSections.authors ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            <CardTitle className="text-lg">Locations</CardTitle>
+            {expandedSections.locations ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </div>
         </CardHeader>
-        {expandedSections.authors && (
+        {expandedSections.locations && (
           <CardContent className="space-y-3">
             {[
-              { value: "all", label: "All Authors", count: 6 },
-              { value: "john-doe", label: "John Doe", count: 1 },
-              { value: "jane-smith", label: "Jane Smith", count: 1 },
-              { value: "mike-johnson", label: "Mike Johnson", count: 1 },
-              { value: "sarah-wilson", label: "Sarah Wilson", count: 1 },
-              { value: "david-brown", label: "David Brown", count: 1 },
-              { value: "emily-davis", label: "Emily Davis", count: 1 },
-            ].map((author) => (
-              <div key={author.value} className="flex items-center justify-between">
+              { value: "all", label: "All Locations", count: 8 },
+              { value: "united-kingdom", label: "United Kingdom", count: 1 },
+              { value: "tokyo-japan", label: "Tokyo Japan", count: 1 },
+              { value: "colorado", label: "Colorado", count: 1 },
+              { value: "alexander-city", label: "Alexander City", count: 1 },
+              { value: "alaska", label: "Alaska", count: 1 },
+            ].map((location) => (
+              <div key={location.value} className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Checkbox
-                    id={`author-${author.value}`}
-                    checked={filters.author === author.value}
-                    onCheckedChange={() => updateURL({ author: author.value })}
+                    id={`location-${location.value}`}
+                    checked={filters.location === location.value}
+                    onCheckedChange={() => updateURL({ location: location.value })}
                   />
-                  <Label htmlFor={`author-${author.value}`} className="text-sm cursor-pointer">
-                    {author.label}
+                  <Label htmlFor={`location-${location.value}`} className="text-sm cursor-pointer">
+                    {location.label}
                   </Label>
                 </div>
-                <span className="text-xs text-gray-500">({author.count})</span>
-              </div>
-            ))}
-          </CardContent>
-        )}
-      </Card>
-
-      {/* Tags */}
-      <Card>
-        <CardHeader className="pb-3 cursor-pointer" onClick={() => toggleSection("tags")}>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">Tags</CardTitle>
-            {expandedSections.tags ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </div>
-        </CardHeader>
-        {expandedSections.tags && (
-          <CardContent className="space-y-3">
-            {[
-              { value: "all", label: "All Tags", count: 15 },
-              { value: "web-development", label: "Web Development", count: 3 },
-              { value: "react", label: "React", count: 2 },
-              { value: "javascript", label: "JavaScript", count: 2 },
-              { value: "css", label: "CSS", count: 2 },
-              { value: "typescript", label: "TypeScript", count: 1 },
-            ].map((tag) => (
-              <div key={tag.value} className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id={`tag-${tag.value}`}
-                    checked={filters.tag === tag.value}
-                    onCheckedChange={() => updateURL({ tag: tag.value })}
-                  />
-                  <Label htmlFor={`tag-${tag.value}`} className="text-sm cursor-pointer">
-                    {tag.label}
-                  </Label>
-                </div>
-                <span className="text-xs text-gray-500">({tag.count})</span>
+                <span className="text-xs text-gray-500">({location.count})</span>
               </div>
             ))}
           </CardContent>
