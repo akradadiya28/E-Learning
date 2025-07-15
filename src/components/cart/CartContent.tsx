@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import type { CartState } from "@/types/cart"
 import { sampleCartItems, availableCoupons } from "@/data/cartData"
+import Link from "next/link"
 
 const CartContent = () => {
   const [cartState, setCartState] = useState<CartState>({
@@ -116,10 +117,10 @@ const CartContent = () => {
           <ShoppingCart className="w-24 h-24 text-gray-300 mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Your cart is empty</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Looks like you haven't added any courses to your cart yet.
+            Looks like you haven&apos;t added any courses to your cart yet.
           </p>
           <Button asChild className="bg-purple-600 hover:bg-purple-700">
-            <a href="/courses">Browse Courses</a>
+            <Link href="/courses">Browse Courses</Link>
           </Button>
         </div>
       </div>
