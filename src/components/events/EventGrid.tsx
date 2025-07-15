@@ -41,7 +41,7 @@ export function EventGrid({ events }: EventGridProps) {
         >
           {/* Event Image */}
           <div className="relative overflow-hidden">
-            <Link href={`/events/${event.slug}`}>
+            <Link href={`/event-detail/${event.slug}`}>
               <Image
                 src={event.image || "/placeholder.svg"}
                 alt={event.title}
@@ -64,7 +64,7 @@ export function EventGrid({ events }: EventGridProps) {
           <CardContent className="p-6 flex flex-col flex-1">
             {/* Event Title */}
             <h3 className="font-bold text-lg md:text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
-              <Link href={`/events/${event.slug}`}>{event.title}</Link>
+              <Link href={`/event-detail/${event.slug}`}>{event.title}</Link>
             </h3>
 
             {/* Event Description */}
