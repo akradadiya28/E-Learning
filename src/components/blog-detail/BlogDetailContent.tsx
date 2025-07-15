@@ -17,7 +17,6 @@ import {
   Facebook, 
   Twitter, 
   Linkedin, 
-  MessageCircle,
   ArrowLeft,
   ArrowRight,
   Tag
@@ -218,7 +217,7 @@ export function BlogDetailContent({ post, relatedPosts }: BlogDetailContentProps
               
               <blockquote className="border-l-4 border-blue-600 pl-6 py-4 bg-blue-50 rounded-r-lg my-8">
                 <p className="text-lg italic text-gray-800">
-                  "This is an example of a blockquote that highlights important information or quotes from the article."
+                  &quot;This is an example of a blockquote that highlights important information or quotes from the article.&quot;
                 </p>
               </blockquote>
               
