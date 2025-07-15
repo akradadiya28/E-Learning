@@ -122,9 +122,6 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
   return (
     <PageLayout
       breadcrumbs={breadcrumbs}
-      backgroundVariant="default"
-      backgroundIntensity="light"
-      showAnimations={false}
     >
       <Suspense fallback={<EventsSkeleton />}>
         <EventsContent searchParams={searchParams} />
