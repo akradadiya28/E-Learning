@@ -81,6 +81,9 @@ async function BlogContent({ searchParams }: BlogPageProps) {
   const startIndex = (currentPage - 1) * postsPerPage
   const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage)
 
+  // Get view mode from URL params, default to grid
+  const viewMode = (params.view as "grid" | "list") || "grid"
+
   const filters = {
     category: params.category || "all",
     author: params.author || "all",
@@ -101,12 +104,13 @@ async function BlogContent({ searchParams }: BlogPageProps) {
           <BlogHeader
             totalResults={filteredPosts.length}
             sortBy={params.sort || "newest"}
+            viewMode={viewMode}
             currentParams={params}
             filters={filters}
             categories={blogCategories}
           />
 
-          <BlogGrid posts={paginatedPosts} />
+          <BlogGrid posts={paginatedPosts} viewMode={viewMode} />
 
           {totalPages > 1 && (
             <BlogPagination currentPage={currentPage} totalPages={totalPages} currentParams={params} />
